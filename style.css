@@ -1,0 +1,165 @@
+#container{
+	margin:auto;
+	height: 100%;
+	width: 100%;
+}
+#container2{
+	margin:auto;
+	height: 900px;
+	width: 960px;
+}
+#parent {
+	width:400px;
+	height:800px;
+	margin: auto;
+	border: 10px solid black;
+	background-color: #012;
+	float: left;
+}
+.mint{
+	width: 38px;
+	height: 38px;
+	border: 1px solid black;
+	float: left;
+	font-size: 20px;
+	font-family: Comic Sans MS;
+}
+body{
+	background-color: #012;
+}
+#obr{
+	width: 230px;
+	height: 100px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#psquares{
+	height: 330px;
+	width:220px;
+	float: left;
+	margin-left:50px;
+}
+#score{
+	margin-top: 100px;
+	width:220px;
+	height: 340px;
+	margin-right: 50px;
+	float: left;
+	text-align: center;
+	font-size: 30px;
+	color: #0f0;
+}
+.squares{
+	border: 5px solid black;
+	height: 100px;
+	width:210px;
+	margin-bottom: 5px;
+}
+#score1{
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border: 5px solid black;
+	height: 80px;
+	margin-bottom: 5px;
+}
+#t{
+	padding-bottom: 8px;
+	padding-top: 8px;
+	border: 5px solid black;
+	height: 80px;
+	margin-bottom: 5px;
+}
+#lvl{
+	padding-bottom: 8px;
+	padding-top: 8px;
+	border: 5px solid black;
+	height: 80px;
+	margin-bottom: 5px;
+}
+#lines{
+	padding-bottom: 8px;
+	padding-top: 8px;
+	border: 5px solid black;
+	height: 80px;
+	margin-bottom: 5px;
+}
+#sd{
+	border-radius: 25px;
+	height: 50px;
+	width: 200px;
+	border: 2px solid green;
+	background-color: #6f6;
+	font-size: 30px;
+	font-family: Candra;
+	text-align: center;
+	font-weight: bold;
+	color: #070;
+	outline: none;
+	margin-bottom: 10px;
+}
+#sd:hover{
+	background-color: #0a0;
+	border: 2px solid #040; 
+	color: #070;
+}
+#se:hover{
+	background-color: #0a0;
+	border: 2px solid #040; 
+	color: #070;
+}
+#side{
+	color: #0f0;
+	font-size: 30px;
+	font-family: Candra;
+	width: 220px;
+	height: 300px;
+	text-align: center;
+	float: left;
+	margin-left: 50px;
+}
+#sr{
+	display: none;
+}
+#sm{
+	background:url(tetris2.png);
+	width: 230px;
+	height: 90px;
+	border: none;
+}
+#se{
+	border-radius: 25px;
+	height: 50px;
+	width: 200px;
+	border: 2px solid green;
+	background-color: #6f6;
+	font-size: 25px;
+	font-family: Candra;
+	text-align: center;
+	font-weight: bold;
+	color: #070;
+	outline: none;
+	margin-bottom: 10px;
+}
+#scores{
+	width: 616px;
+	background-color: #071727;
+	border: 2px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	height: 880px;
+	z-index: 1;
+	bottom: 900px;
+	position: relative;
+	display: none;
+}
+.cell{
+	width: 304px;
+	border: 2px solid black;
+	height: 40px;
+	font-family: Candra;
+	font-size: 30px;
+	float: left;
+	color: green;
+	font-weight: bold;
+	text-align: center;
+}
