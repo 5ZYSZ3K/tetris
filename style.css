@@ -1,12 +1,6 @@
 #container{
 	margin:auto;
-	height: 100%;
-	width: 100%;
-}
-#container2{
-	margin:auto;
-	height: 900px;
-	width: 960px;
+	width: 1000px;
 }
 #parent {
 	width:400px;
@@ -82,84 +76,4 @@ body{
 	border: 5px solid black;
 	height: 80px;
 	margin-bottom: 5px;
-}
-#sd{
-	border-radius: 25px;
-	height: 50px;
-	width: 200px;
-	border: 2px solid green;
-	background-color: #6f6;
-	font-size: 30px;
-	font-family: Candra;
-	text-align: center;
-	font-weight: bold;
-	color: #070;
-	outline: none;
-	margin-bottom: 10px;
-}
-#sd:hover{
-	background-color: #0a0;
-	border: 2px solid #040; 
-	color: #070;
-}
-#se:hover{
-	background-color: #0a0;
-	border: 2px solid #040; 
-	color: #070;
-}
-#side{
-	color: #0f0;
-	font-size: 30px;
-	font-family: Candra;
-	width: 220px;
-	height: 300px;
-	text-align: center;
-	float: left;
-	margin-left: 50px;
-}
-#sr{
-	display: none;
-}
-#sm{
-	background:url(tetris2.png);
-	width: 230px;
-	height: 90px;
-	border: none;
-}
-#se{
-	border-radius: 25px;
-	height: 50px;
-	width: 200px;
-	border: 2px solid green;
-	background-color: #6f6;
-	font-size: 25px;
-	font-family: Candra;
-	text-align: center;
-	font-weight: bold;
-	color: #070;
-	outline: none;
-	margin-bottom: 10px;
-}
-#scores{
-	width: 616px;
-	background-color: #071727;
-	border: 2px solid black;
-	margin-left: auto;
-	margin-right: auto;
-	height: 880px;
-	z-index: 1;
-	bottom: 900px;
-	position: relative;
-	display: none;
-}
-.cell{
-	width: 304px;
-	border: 2px solid black;
-	height: 40px;
-	font-family: Candra;
-	font-size: 30px;
-	float: left;
-	color: green;
-	font-weight: bold;
-	text-align: center;
 }
