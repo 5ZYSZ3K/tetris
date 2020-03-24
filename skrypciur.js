@@ -6,6 +6,7 @@ var time = 0;
 var tm;
 var minu = 0;
 var hour = 0;
+var a;
 var time1 = "";
 tp[0] = Math.floor(Math.random()*7);
 tp[1] = Math.floor(Math.random()*7);
@@ -17,9 +18,11 @@ var image2;
 var begin = 0;
 var lines = 0;
 var keyb = false;
+var subm;
 var dstr = 0;
 var combo = false;
 var start = true;
+var lol = "lol";
 var settled = new Array(20);
 var r1 = 0;
 var r2 = 0;
@@ -91,6 +94,9 @@ function rand(){
 		tp[0] = tp[1];
 		tp[1] = tp[2];
 		tp[2] = tp[3];
+		score = 0;
+		lvl = 1;
+		time = 0;
 		tp[3] = Math.floor(Math.random()*7);
 		image = document.createElement("IMG");
 		image.setAttribute("src", "tetris1.png");
@@ -125,17 +131,8 @@ function rand(){
 		}
 	}
 	else {
-		image = document.createElement("IMG");
-		image.setAttribute("src", "tetris2.png");
-		image.setAttribute("width", "230");
-		image.setAttribute("id", "obr4");
-		image.setAttribute("onclick", "cls()");
-		image1 = document.getElementById("obr");
-		image1.replaceChild(image, image1.childNodes[0]);
+		document.getElementById("obr").innerHTML = "<form action='finish.php' method='post'><input type='text' name='score' value="+score+" id='sr' /> <input type='submit' name='score1' id='sm' value=''/></form>";
 		clearInterval(tm);
-		score = 0;
-		lvl = 1;
-		time = 0;
 	}
 	image1 = document.getElementById("psquares");
 	image1.innerHTML = '<img src="sqr'+tp[1]+'.png"></img><img src="sqr'+tp[2]+'.png"></img><img src="sqr'+tp[3]+'.png"></img>';
@@ -1326,4 +1323,45 @@ function timer(){
 		}
 	}
 	document.getElementById("t").innerHTML = 'TIME<br><font color="red">'+time1+"</font>";
+}
+function rest(){
+	document.getElementById("container").setAttribute("onclick", "del()");
+}
+function rest1(){
+	document.getElementById("container").setAttribute("onclick", "del1()");
+}
+function del1(){
+	document.getElementById("scores").style.display="none";
+	document.getElementById("container").style.opacity = 1;
+	document.getElementById("container").removeAttribute("onclick");
+}
+function del(){
+	document.getElementById("sl").remove();
+	document.getElementById("container").style.opacity = 1;
+	document.getElementById("container").removeAttribute("onclick");
+}
+function slide(){
+	a = document.createElement("DIV");
+	a.style.backgroundImage = "url('arrows.jpg')";
+	a.setAttribute("id", "sl");
+	a.style.width = "646px";
+	a.style.height = "484px";
+	a.style.zIndex = "1";
+	a.style.marginLeft = "auto";
+	a.style.marginRight = "auto";
+	a.style.marginTop = "auto";
+	a.style.marginBottom = "auto";
+	a.style.position = "relative";
+	a.style.bottom = "700px";
+	document.body.appendChild(a);
+	document.body.style.height = "950px";
+	setTimeout("rest()", 1);
+	document.getElementById("container").style.opacity = 0.3;
+}
+function slide1(){
+	document.getElementById("scores").style.display = "block";
+	document.getElementById("container").style.opacity = 0.3;
+	document.body.style.height = "950px";
+	document.getElementById("container").style.height = "950px";
+	setTimeout("rest1()", 1);
 }
