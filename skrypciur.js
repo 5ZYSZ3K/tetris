@@ -1,4 +1,3 @@
-var div = "";
 var col = "";
 var t1 = new Array(20);
 var tp = new Array(4);
@@ -42,16 +41,52 @@ osqr[2] = new Array(2);
 osqr[3] = new Array(2);
 osqr[0] = new Array(2);
 var itr;
+console.log(document.getElementById("container").clientWidth);
+let div = document.getElementById("parent");
+console.log(div.clientWidth);
+window.addEventListener('resize', function(){
+	let parentWidth = 0.5*document.getElementById('container').clientWidth-20;
+	for (let i=0; i <= 19; i++){
+		for (let j=0; j <= 9; j++){
+			curdiv = document.getElementById(i+"_"+j);
+			curdiv.style.height = (parentWidth/10)+"px";
+			curdiv.style.width = (parentWidth/10)+"px";
+		}
+		div.append(document.createElement("br"));
+	}
+	document.getElementById("score").style.fontSize = document.getElementsByClassName("info")[0].clientHeight*(5/14)+"px";
+	document.getElementById("parent").style.height = (2*parentWidth+20)+"px";
+	document.getElementById("parent").style.width = (parentWidth+20)+"px";
+	document.getElementById("tet").style.width = (parentWidth+20)+"px";
+	if (document.querySelector("#obr img").clientWidth > document.getElementById("tet").clientWidth){
+		let obr = document.getElementById("obr");
+		obr.style.width = "70%";
+		obr.style.marginLeft = "auto";
+		obr.style.marginRight = "auto";
+		obr.style.height = "auto";
+		let img = document.querySelector("#obr img");
+		img.style.width =  "100%";
+	}
+});
 function main(){
-	for (i=0; i <= 19; i++){
+	let parentWidth = 0.5*document.getElementById('container').clientWidth-20;
+	document.getElementById("parent").style.height = (2*parentWidth+20)+"px";
+	document.getElementById("parent").style.width = (parentWidth+20)+"px";
+	document.getElementById("tet").style.width = (parentWidth+20)+"px";
+	document.getElementById("score").style.fontSize = document.getElementsByClassName("info")[0].clientHeight*(5/14)+"px";
+	for (let i=0; i <= 19; i++){
 		settled[i] = new Array(10);
 		t1[i] = new Array(10);
-		for (j=0; j <= 9; j++){
+		for (let j=0; j <= 9; j++){
 			settled[i][j] = false;
-			div = div + '<div id="'+i+'_'+j+'" class="mint"></div>';
-		}	
+			let curdiv = document.createElement("div");
+			curdiv.setAttribute("id", i+"_"+j);
+			curdiv.classList.add('mint');
+			div.append(curdiv);
+			curdiv.style.height = (parentWidth/10)+"px";
+			curdiv.style.width = (parentWidth/10)+"px";
+		}
 	}
-	document.getElementById("parent").innerHTML = div;
 }
 function rand(){
 	switch(dstr){
@@ -137,8 +172,13 @@ function rand(){
 		lvl = 1;
 		time = 0;
 	}
-	image1 = document.getElementById("psquares");
-	image1.innerHTML = '<img src="sqr'+tp[1]+'.png"></img><img src="sqr'+tp[2]+'.png"></img><img src="sqr'+tp[3]+'.png"></img>';
+	let squares = document.getElementsByClassName('squares');
+	for (let i=0; i<3; i++){
+		if(squares[i].firstElementChild) squares[i].removeChild(squares[i].firstElementChild);
+		let img = document.createElement("img");
+		img.setAttribute("src", "sqr"+tp[i+1]+".png");
+		squares[i].append(img);
+	}
 }
 function onemidthree(){
 	psqr[0][0] = 0;

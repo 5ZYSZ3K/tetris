@@ -2,16 +2,18 @@
 <html lang="pl">
 <head>
 	<meta charset="utf-8"/>
-	<title>funkcje</title>
+	<title>Tetris</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="icon" href="sqr4.png" />
 </head>
 <body onload="main()">
 	<div id="container">
 		<div id="score">
-			<div id="score1">SCORE</div>
-			<div id="t">TIME</div>
-			<div id="lvl">LVL</div>
-			<div id="lines">LINES</div>
+			<div id="score1" class="info">SCORE</div>
+			<div id="t" class="info">TIME</div>
+			<div id="lvl" class="info">LVL</div>
+			<div id="lines" class="info">LINES</div>
 		</div>
 		<div id="tet">
 			<div id="obr">
@@ -25,7 +27,6 @@
 			<div id="squares3" class="squares"></div>
 		</div>
 	</div>
-	<div style="clear: both;"></div>
 	<script src="skrypciur.js"></script>
 </body>
 </html>
