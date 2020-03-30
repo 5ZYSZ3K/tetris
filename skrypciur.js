@@ -45,6 +45,14 @@ console.log(document.getElementById("container").clientWidth);
 let div = document.getElementById("parent");
 console.log(div.clientWidth);
 window.addEventListener('resize', function(){
+	if (window.innerWidth < window.innerHeight){
+		document.getElementById("container").style.height="100vw";
+		document.getElementById("container").style.width="89vw";
+	}
+	else {
+		document.getElementById("container").style.height="99vh";
+		document.getElementById("container").style.width="89vh";
+	}
 	let parentWidth = 0.5*document.getElementById('container').clientWidth-20;
 	for (let i=0; i <= 19; i++){
 		for (let j=0; j <= 9; j++){
@@ -69,6 +77,14 @@ window.addEventListener('resize', function(){
 	}
 });
 function main(){
+	if (window.innerWidth < window.innerHeight){
+		document.getElementById("container").style.height="100vw";
+		document.getElementById("container").style.width="89vw";
+	}
+	else {
+		document.getElementById("container").style.height="99vh";
+		document.getElementById("container").style.width="89vh";
+	}
 	let parentWidth = 0.5*document.getElementById('container').clientWidth-20;
 	document.getElementById("parent").style.height = (2*parentWidth+20)+"px";
 	document.getElementById("parent").style.width = (parentWidth+20)+"px";
@@ -354,172 +370,181 @@ function falling(){
 		}
 	}
 }
+function arrowLeft(){
+	if ((psqr[0][1] > 0 && psqr[1][1] > 0 && psqr[2][1] > 0 && psqr[3][1] > 0) && !(settled[psqr[0][0]][psqr[0][1]-1] || settled[psqr[1][0]][psqr[1][1]-1] || settled[psqr[2][0]][psqr[2][1]-1] || settled[psqr[3][0]][psqr[3][1]-1])){
+		osqr[0][0] = psqr[0][0];
+		osqr[0][1] = psqr[0][1];
+		osqr[1][0] = psqr[1][0];
+		osqr[1][1] = psqr[1][1];
+		osqr[2][0] = psqr[2][0];
+		osqr[2][1] = psqr[2][1];
+		osqr[3][0] = psqr[3][0];
+		osqr[3][1] = psqr[3][1];
+		psqr[0][1]--;
+		psqr[1][1]--;
+		psqr[2][1]--;
+		psqr[3][1]--;
+		document.getElementById(osqr[0][0]+"_"+osqr[0][1]).style.backgroundColor = "#012";
+		document.getElementById(osqr[1][0]+"_"+osqr[1][1]).style.backgroundColor = "#012";
+		document.getElementById(osqr[2][0]+"_"+osqr[2][1]).style.backgroundColor = "#012";
+		document.getElementById(osqr[3][0]+"_"+osqr[3][1]).style.backgroundColor = "#012";
+		switch(tp[0]){
+			case 0:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = '#f0f';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = "#f0f";
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = "#f0f";
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = "#f0f";
+			break;
+			case 1:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'orange';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'orange';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'orange';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'orange';
+			break;
+			case 2:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = '#0ff';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = '#0ff';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = '#0ff';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = '#0ff';
+			break;
+			case 3:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'green';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'green';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'green';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'green';
+			break;
+			case 4:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'red';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'red';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'red';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'red';
+			break;
+			case 5:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'blue';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'blue';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'blue';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'blue';
+			break;
+			case 6:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'yellow';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'yellow';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'yellow';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'yellow';
+			break;
+		}
+	}
+}
+function arrowRight(){
+	if (psqr[0][1] < 9 && psqr[1][1] < 9 && psqr[2][1] < 9 && psqr[3][1] < 9 && !settled[psqr[0][0]][psqr[0][1]+1] && !settled[psqr[1][0]][psqr[1][1]+1] && !settled[psqr[2][0]][psqr[2][1]+1] && !settled[psqr[3][0]][psqr[3][1]+1]){
+		osqr[0][0] = psqr[0][0];
+		osqr[0][1] = psqr[0][1];
+		osqr[1][0] = psqr[1][0];
+		osqr[1][1] = psqr[1][1];
+		osqr[2][0] = psqr[2][0];
+		osqr[2][1] = psqr[2][1];
+		osqr[3][0] = psqr[3][0];
+		osqr[3][1] = psqr[3][1];
+		psqr[0][1]++;
+		psqr[1][1]++;
+		psqr[2][1]++;
+		psqr[3][1]++;
+		document.getElementById(osqr[0][0]+"_"+osqr[0][1]).style.backgroundColor = "#012";
+		document.getElementById(osqr[1][0]+"_"+osqr[1][1]).style.backgroundColor = "#012";
+		document.getElementById(osqr[2][0]+"_"+osqr[2][1]).style.backgroundColor = "#012";
+		document.getElementById(osqr[3][0]+"_"+osqr[3][1]).style.backgroundColor = "#012";
+		switch(tp[0]){
+			case 0:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = '#f0f';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = "#f0f";
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = "#f0f";
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = "#f0f";
+			break;
+			case 1:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'orange';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'orange';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'orange';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'orange';
+			break;
+			case 2:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = '#0ff';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = '#0ff';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = '#0ff';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = '#0ff';
+			break;
+			case 3:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'green';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'green';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'green';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'green';
+			break;
+			case 4:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'red';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'red';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'red';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'red';
+			break;
+			case 5:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'blue';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'blue';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'blue';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'blue';
+			break;
+			case 6:
+				document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'yellow';
+				document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'yellow';
+				document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'yellow';
+				document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'yellow';
+			break;
+		}
+		clearInterval(itr);
+		itr = setInterval(falling, speed);
+	}
+}
+function arrowDown(){
+	if (!keyb){
+		clearInterval(itr);
+		itr = setInterval(falling, speed/10);
+		keyb = true;
+	}
+}
+function arrowUp(){
+	switch (tp[0]){
+		case 0: onemidthreer(); 
+		break;
+		case 1: oneleftthreer(); 
+		break;
+		case 2: onerightthreer(); 
+		break;
+		case 3: tworighttwor(); 
+		break;
+		case 4: twolefttwor();
+		break;
+		case 5: barr();
+		break;
+	}
+	clearInterval(itr);
+	itr = setInterval(falling, speed);
+}
 window.addEventListener('keydown', function(event){
 	switch (event.keyCode){
-		case 37:
-		if ((psqr[0][1] > 0 && psqr[1][1] > 0 && psqr[2][1] > 0 && psqr[3][1] > 0) && !(settled[psqr[0][0]][psqr[0][1]-1] || settled[psqr[1][0]][psqr[1][1]-1] || settled[psqr[2][0]][psqr[2][1]-1] || settled[psqr[3][0]][psqr[3][1]-1])){
-			osqr[0][0] = psqr[0][0];
-			osqr[0][1] = psqr[0][1];
-			osqr[1][0] = psqr[1][0];
-			osqr[1][1] = psqr[1][1];
-			osqr[2][0] = psqr[2][0];
-			osqr[2][1] = psqr[2][1];
-			osqr[3][0] = psqr[3][0];
-			osqr[3][1] = psqr[3][1];
-			psqr[0][1]--;
-			psqr[1][1]--;
-			psqr[2][1]--;
-			psqr[3][1]--;
-			document.getElementById(osqr[0][0]+"_"+osqr[0][1]).style.backgroundColor = "#012";
-			document.getElementById(osqr[1][0]+"_"+osqr[1][1]).style.backgroundColor = "#012";
-			document.getElementById(osqr[2][0]+"_"+osqr[2][1]).style.backgroundColor = "#012";
-			document.getElementById(osqr[3][0]+"_"+osqr[3][1]).style.backgroundColor = "#012";
-			switch(tp[0]){
-				case 0:
-					document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = '#f0f';
-					document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = "#f0f";
-					document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = "#f0f";
-					document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = "#f0f";
-				break;
-				case 1:
-					document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'orange';
-					document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'orange';
-					document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'orange';
-					document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'orange';
-				break;
-				case 2:
-					document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = '#0ff';
-					document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = '#0ff';
-					document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = '#0ff';
-					document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = '#0ff';
-				break;
-				case 3:
-					document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'green';
-					document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'green';
-					document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'green';
-					document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'green';
-				break;
-				case 4:
-					document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'red';
-					document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'red';
-					document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'red';
-					document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'red';
-				break;
-				case 5:
-					document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'blue';
-					document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'blue';
-					document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'blue';
-					document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'blue';
-				break;
-				case 6:
-					document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'yellow';
-					document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'yellow';
-					document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'yellow';
-					document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'yellow';
-				break;
-			}
-		}
+		case 37: arrowLeft();
 		break;
-		case 39:
-			if (psqr[0][1] < 9 && psqr[1][1] < 9 && psqr[2][1] < 9 && psqr[3][1] < 9 && !settled[psqr[0][0]][psqr[0][1]+1] && !settled[psqr[1][0]][psqr[1][1]+1] && !settled[psqr[2][0]][psqr[2][1]+1] && !settled[psqr[3][0]][psqr[3][1]+1]){
-				osqr[0][0] = psqr[0][0];
-				osqr[0][1] = psqr[0][1];
-				osqr[1][0] = psqr[1][0];
-				osqr[1][1] = psqr[1][1];
-				osqr[2][0] = psqr[2][0];
-				osqr[2][1] = psqr[2][1];
-				osqr[3][0] = psqr[3][0];
-				osqr[3][1] = psqr[3][1];
-				psqr[0][1]++;
-				psqr[1][1]++;
-				psqr[2][1]++;
-				psqr[3][1]++;
-				document.getElementById(osqr[0][0]+"_"+osqr[0][1]).style.backgroundColor = "#012";
-				document.getElementById(osqr[1][0]+"_"+osqr[1][1]).style.backgroundColor = "#012";
-				document.getElementById(osqr[2][0]+"_"+osqr[2][1]).style.backgroundColor = "#012";
-				document.getElementById(osqr[3][0]+"_"+osqr[3][1]).style.backgroundColor = "#012";
-				switch(tp[0]){
-					case 0:
-						document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = '#f0f';
-						document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = "#f0f";
-						document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = "#f0f";
-						document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = "#f0f";
-					break;
-					case 1:
-						document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'orange';
-						document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'orange';
-						document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'orange';
-						document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'orange';
-					break;
-					case 2:
-						document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = '#0ff';
-						document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = '#0ff';
-						document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = '#0ff';
-						document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = '#0ff';
-					break;
-					case 3:
-						document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'green';
-						document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'green';
-						document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'green';
-						document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'green';
-					break;
-					case 4:
-						document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'red';
-						document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'red';
-						document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'red';
-						document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'red';
-					break;
-					case 5:
-						document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'blue';
-						document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'blue';
-						document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'blue';
-						document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'blue';
-					break;
-					case 6:
-						document.getElementById(psqr[0][0]+"_"+psqr[0][1]).style.backgroundColor = 'yellow';
-						document.getElementById(psqr[1][0]+"_"+psqr[1][1]).style.backgroundColor = 'yellow';
-						document.getElementById(psqr[2][0]+"_"+psqr[2][1]).style.backgroundColor = 'yellow';
-						document.getElementById(psqr[3][0]+"_"+psqr[3][1]).style.backgroundColor = 'yellow';
-					break;
-				}
-				clearInterval(itr);
-				itr = setInterval(falling, speed);
-			}
+		case 39: arrowRight();
 		break;
-		case 40:
-			if (!keyb){
-				clearInterval(itr);
-				itr = setInterval(falling, speed/10);
-				keyb = true;
-			}
+		case 40: arrowDown();
 		break;
-		case 38:
-			switch (tp[0]){
-				case 0: onemidthreer(); 
-				break;
-				case 1: oneleftthreer(); 
-				break;
-				case 2: onerightthreer(); 
-				break;
-				case 3: tworighttwor(); 
-				break;
-				case 4: twolefttwor();
-				break;
-				case 5: barr();
-				break;
-			}
-			clearInterval(itr);
-			itr = setInterval(falling, speed);
+		case 38: arrowUp();
 		break;
 	}
 }, false);
+function arrowDownUp(){
+	clearInterval(itr);
+	itr = setInterval(falling, speed);
+	keyb = false;
+}
 window.addEventListener('keyup', function(event) {
-	switch (event.keyCode){
-		case 40:
-			clearInterval(itr);
-			itr = setInterval(falling, speed);
-			 keyb = false;
-		break;
+	if(event.keyCode === 40){
+		arrowDownUp();
 	}
 }, false);
 function onemidthreer(){
