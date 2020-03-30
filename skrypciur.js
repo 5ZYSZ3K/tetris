@@ -525,6 +525,106 @@ function arrowUp(){
 	clearInterval(itr);
 	itr = setInterval(falling, speed);
 }
+function detectMob() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+function Polygon() {
+	var pointList = [];
+	this.node = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+	function build(arg) {
+		var res = [];
+		for (var i = 0, l = arg.length; i < l; i++) {
+			res.push(arg[i].join(','));
+		}
+		return res.join(' ');
+	}
+	this.attribute = function (key, val) {
+		if (val === undefined) return this.node.getAttribute(key);
+		this.node.setAttribute(key, val);
+	};
+	this.getPoint = function (i) {
+		return pointList[i]
+	};
+	this.setPoint = function (i, x, y) {
+		pointList[i] = [x, y];
+		this.attribute('points', build(pointList));
+	};
+	this.points = function () {
+		for (var i = 0, l = arguments.length; i < l; i += 2) {
+			pointList.push([arguments[i], arguments[i + 1]]);
+		}
+		this.attribute('points', build(pointList));
+	};
+	this.points.apply(this, arguments);
+}
+if (detectMob()){
+	const polygon = new Array(4);
+	polygon[0] = new Polygon(315.869,21.178, 294.621,0, 91.566,203.718, 294.621,407.436, 315.869,386.258, 133.924,203.718);
+	polygon[1] = new Polygon(386.258,91.567, 203.718,273.512, 21.179,91.567, 0,112.815, 203.718,315.87, 407.437,112.815);
+	polygon[2] = new Polygon(112.814,0, 91.566,21.178, 273.512,203.718, 91.566,386.258, 112.814,407.436, 315.869,203.718);
+	polygon[3] = document. createElementNS("http://www.w3.org/2000/svg", "path");
+	polygon[3].setAttribute("d", "M407.517,123.262l-27.717,11.48c18.585,44.869,18.585,94.29,0,139.159c-18.585,44.869-53.531,79.815-98.4,98.4 c-92.627,38.368-199.194-5.776-237.559-98.4C8.46,188.486,43.246,91.212,121.514,46.501v74.992h30V7.498H37.519v30h43.755 c-73,57.164-102.323,158.139-65.15,247.885c33.754,81.49,112.806,130.768,195.972,130.762c26.96-0.002,54.367-5.184,80.784-16.125 C400.788,355.322,452.213,231.169,407.517,123.262z");
+	const svg = new Array(4);
+	for(let i=0; i<4; i++){
+		svg[i] = document.createElementNS("http://www.w3.org/2000/svg","svg");
+		svg[i].setAttribute("id", "Layer_"+i);
+		svg[i].setAttribute("version", "1.1");
+		svg[i].setAttribute("viewBox", "0 0 512 512");
+		svg[i].classList.add("layer");
+		document.body.append(svg[i]);
+		if (i !== 3) svg[i].append(polygon[i].node);
+		else svg[i].append(polygon[i]);
+	}
+	let leftWorks = false;
+	let leftActive;
+	let leftIt;
+	let rightWorks = false;
+	let rightActive;
+	let rightIt;
+	svg[0].addEventListener("touchstart", function(){
+		arrowLeft();
+		leftActive = setTimeout(function(){
+			leftWorks = true;
+			leftIt = setInterval(arrowLeft, 50);
+		}, 500);
+	});
+	svg[0].addEventListener("touchend", function(){
+		if (leftWorks) clearInterval(leftIt);
+		else clearTimeout(leftActive);
+	});
+	svg[1].addEventListener("touchstart", function(){
+		arrowDown();
+	});
+	svg[1].addEventListener("touchend", function(){
+		arrowDownUp();
+	});
+	svg[2].addEventListener("touchstart", function(){
+		arrowRight();
+		rightActive = setTimeout(function(){
+			rightWorks = true;
+			rightIt = setInterval(arrowRight, 50);
+		}, 500);
+	});
+	svg[2].addEventListener("touchend", function(){
+		if (rightWorks) clearInterval(rightIt);
+		else clearTimeout(rightActive);
+	});
+	svg[3].addEventListener("touchstart", function(){
+		arrowUp();
+	});
+}
 window.addEventListener('keydown', function(event){
 	switch (event.keyCode){
 		case 37: arrowLeft();

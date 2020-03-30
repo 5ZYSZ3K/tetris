@@ -74,6 +74,33 @@ body{
 	height: 23%;
 	margin-bottom: 2%;
 }
+.layer{
+	width: 17%;
+	height: 17%;
+	position: absolute;
+	z-index: 3;
+	fill: white;
+}
+#Layer_0{
+	top:60%;
+	left:0;
+	margin-left: 3%;
+}
+#Layer_1{
+	top:80%;
+	left:0;
+	margin-left: 3%;
+}
+#Layer_2{
+	top:60%;
+	right:0;
+	margin-right: 3%;
+}
+#Layer_3{
+	top:80%;
+	right:0;
+	margin-right: 3%;
+}
 @media (max-width: 560px){
 	#obr{
 		width: 70%;
