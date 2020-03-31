@@ -30,6 +30,12 @@ var score = 0;
 var score1 = 0;
 var speed = 1000;
 var lvl = 1;
+let leftWorks = false;
+let leftActive;
+let leftIt;
+let rightWorks = false;
+let rightActive;
+let rightIt;
 var psqr = new Array(4);
 psqr[1] = new Array(2);
 psqr[2] = new Array(2);
@@ -41,9 +47,7 @@ osqr[2] = new Array(2);
 osqr[3] = new Array(2);
 osqr[0] = new Array(2);
 var itr;
-console.log(document.getElementById("container").clientWidth);
 let div = document.getElementById("parent");
-console.log(div.clientWidth);
 window.addEventListener('resize', function(){
 	if (window.innerWidth < window.innerHeight){
 		document.getElementById("container").style.height="100vw";
@@ -152,6 +156,11 @@ function rand(){
 		image1.replaceChild(image, image1.childNodes[0]);
 		document.getElementById("obr2").remove();
 		tm = setInterval(timer, 1000);
+		window.addEventListener('keydown', addKeyboardDownListener, false);
+		window.addEventListener('keyup', addKeyboardUpListener, false);
+		if(detectMob()){
+			addTouchListener();
+		}
 	}
 	if (!settled[0][3]&& !settled[0][4] && !settled[0][5] && !settled[0][6] && !settled[1][3]&& !settled[1][4] && !settled[1][5] && !settled[1][6] && !settled[2][4] && !settled[2][5] && !settled[2][6]){
 		tp[0] = tp[1];
@@ -187,6 +196,11 @@ function rand(){
 		score = 0;
 		lvl = 1;
 		time = 0;
+		window.removeEventListener('keydown', addKeyboardDownListener);
+		window.removeEventListener('keyup', addKeyboardUpListener);
+		if(detectMob()){
+			removeTouchListener();
+		}
 	}
 	let squares = document.getElementsByClassName('squares');
 	for (let i=0; i<3; i++){
@@ -507,6 +521,11 @@ function arrowDown(){
 		keyb = true;
 	}
 }
+function arrowDownUp(){
+	clearInterval(itr);
+	itr = setInterval(falling, speed);
+	keyb = false;
+}
 function arrowUp(){
 	switch (tp[0]){
 		case 0: onemidthreer(); 
@@ -587,66 +606,7 @@ if (detectMob()){
 		if (i !== 3) svg[i].append(polygon[i].node);
 		else svg[i].append(polygon[i]);
 	}
-	let leftWorks = false;
-	let leftActive;
-	let leftIt;
-	let rightWorks = false;
-	let rightActive;
-	let rightIt;
-	svg[0].addEventListener("touchstart", function(){
-		arrowLeft();
-		leftActive = setTimeout(function(){
-			leftWorks = true;
-			leftIt = setInterval(arrowLeft, 50);
-		}, 500);
-	});
-	svg[0].addEventListener("touchend", function(){
-		if (leftWorks) clearInterval(leftIt);
-		else clearTimeout(leftActive);
-	});
-	svg[1].addEventListener("touchstart", function(){
-		arrowDown();
-	});
-	svg[1].addEventListener("touchend", function(){
-		arrowDownUp();
-	});
-	svg[2].addEventListener("touchstart", function(){
-		arrowRight();
-		rightActive = setTimeout(function(){
-			rightWorks = true;
-			rightIt = setInterval(arrowRight, 50);
-		}, 500);
-	});
-	svg[2].addEventListener("touchend", function(){
-		if (rightWorks) clearInterval(rightIt);
-		else clearTimeout(rightActive);
-	});
-	svg[3].addEventListener("touchstart", function(){
-		arrowUp();
-	});
 }
-window.addEventListener('keydown', function(event){
-	switch (event.keyCode){
-		case 37: arrowLeft();
-		break;
-		case 39: arrowRight();
-		break;
-		case 40: arrowDown();
-		break;
-		case 38: arrowUp();
-		break;
-	}
-}, false);
-function arrowDownUp(){
-	clearInterval(itr);
-	itr = setInterval(falling, speed);
-	keyb = false;
-}
-window.addEventListener('keyup', function(event) {
-	if(event.keyCode === 40){
-		arrowDownUp();
-	}
-}, false);
 function onemidthreer(){
 	switch(r1){
 		case 0:
@@ -1421,6 +1381,71 @@ function barr(){
 		break;
 	}
 }
+function addKeyboardDownListener(){
+	switch (event.keyCode){
+		case 37: arrowLeft();
+		break;
+		case 39: arrowRight();
+		break;
+		case 40: arrowDown();
+		break;
+		case 38: arrowUp();
+		break;
+	}
+}
+function addKeyboardUpListener(){
+	if(event.keyCode === 40){
+		arrowDownUp();
+	}
+}
+function touchMoveLeftStart(){
+	arrowLeft();
+	leftActive = setTimeout(function(){
+		leftWorks = true;
+		leftIt = setInterval(arrowLeft, 50);
+	}, 500);
+}
+function touchMoveLeftEnd(){
+	if (leftWorks) {
+		clearInterval(leftIt);
+		leftWorks = false;
+	}
+	else clearTimeout(leftActive);
+}
+function touchMoveRightStart(){
+	arrowRight();
+	rightActive = setTimeout(function(){
+		rightWorks = true;
+		rightIt = setInterval(arrowRight, 50);
+	}, 500);
+}
+function touchMoveRightEnd(){
+	if (rightWorks) {
+		clearInterval(rightIt);
+		rightWorks = false;
+	}
+	else {
+		clearTimeout(rightActive);
+	}
+}
+function addTouchListener(){
+	document.getElementById("Layer_0").addEventListener("touchstart", touchMoveLeftStart,false);
+	document.getElementById("Layer_0").addEventListener("touchend", touchMoveLeftEnd),false;
+	document.getElementById("Layer_1").addEventListener("touchstart", arrowDown,false);
+	document.getElementById("Layer_1").addEventListener("touchend", arrowDownUp,false);
+	document.getElementById("Layer_2").addEventListener("touchstart", touchMoveRightStart,false);
+	document.getElementById("Layer_2").addEventListener("touchend", touchMoveRightEnd,false);
+	document.getElementById("Layer_3").addEventListener("touchstart", arrowUp,false);	
+}
+function removeTouchListener(){
+	document.getElementById("Layer_0").removeEventListener("touchstart", touchMoveLeftStart);
+	document.getElementById("Layer_0").removeEventListener("touchend", touchMoveLeftEnd);
+	document.getElementById("Layer_1").removeEventListener("touchstart", arrowDown);
+	document.getElementById("Layer_1").removeEventListener("touchend", arrowDownUp);
+	document.getElementById("Layer_2").removeEventListener("touchstart", touchMoveRightStart);
+	document.getElementById("Layer_2").removeEventListener("touchend", touchMoveRightEnd);
+	document.getElementById("Layer_3").removeEventListener("touchstart", arrowUp);	
+}
 function stop(){
 	image = document.createElement("IMG");
 	image.setAttribute("src", "tetris.png");
@@ -1431,6 +1456,11 @@ function stop(){
 	image1.replaceChild(image, image1.childNodes[0]);
 	clearInterval(itr);
 	clearInterval(tm);
+	window.removeEventListener('keydown', addKeyboardDownListener);
+	window.removeEventListener('keyup', addKeyboardUpListener);
+	if(detectMob()){
+		removeTouchListener();
+	}
 }
 function resume(){
 	image = document.createElement("IMG");
@@ -1442,6 +1472,11 @@ function resume(){
 	image1.replaceChild(image, image1.childNodes[0]);
 	itr = setInterval(falling, speed);
 	tm = setInterval(timer, 1000);
+	window.addEventListener('keydown', addKeyboardDownListener, false);
+	window.addEventListener('keyup', addKeyboardUpListener, false);
+	if(detectMob()){
+		addTouchListener();
+	}
 }
 function cls(){
 	for (i=0; i <= 19; i++){
@@ -1454,10 +1489,26 @@ function cls(){
 	image.setAttribute("src", "tetris.png");
 	image.setAttribute("width", "230");
 	image.setAttribute("id", "obr1");
-	image.setAttribute("onclick", "rand()");
+	image.addEventListener('click', function(){
+		image = document.createElement("IMG");
+		image.setAttribute("src", "tetris1.png");
+		image.setAttribute("width", "230");
+		image.setAttribute("id", "obr1");
+		image.setAttribute("onclick", "stop()");
+		image1 = document.getElementById("obr");
+		image1.replaceChild(image, image1.childNodes[0]);
+		window.addEventListener('keydown', addKeyboardDownListener, false);
+		window.addEventListener('keyup', addKeyboardUpListener, false);
+		if(detectMob()){
+			addTouchListener();
+		}
+		tm = setInterval(timer, 1000);
+		rand();
+	});
 	image1 = document.getElementById("obr");
 	image1.replaceChild(image, image1.childNodes[0]);
 	time1 = 0;
+	time = 0;
 }
 function timer(){
 	time++;
